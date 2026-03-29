@@ -23,8 +23,8 @@ export async function submitServiceRequest(formData: FormData) {
     // MOCK RESEND INTEGRATION:
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: 'leads@fabiansalts.com',
-      to: 'fabian@fabiansalts.com',
+      from: 'onboarding@resend.dev',
+      to: 'gcarson1@vols.utk.edu',
       subject: `🚨 ${data.urgency} Plumbing Request: ${data.name}`,
       html: `<p>New request from ${data.name} at ${data.address}. Issue: ${data.serviceType}.</p>`,
     });
