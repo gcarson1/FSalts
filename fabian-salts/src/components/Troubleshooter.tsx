@@ -229,7 +229,7 @@ export default function Troubleshooter() {
         <p className="text-xs sm:text-sm text-slate-400 text-center">
           💡 <strong>Don't see your issue?</strong> {" "}
           <a href="#booking-form" className="text-blue-400 hover:text-blue-300 transition">Schedule a service call</a> or {" "}
-          <a href="tel:+15551234567" className="text-blue-400 hover:text-blue-300 transition">call 555-123-4567</a> and describe your problem to our experts.
+          <a href="tel:+15551234567" className="text-blue-400 hover:text-blue-300 transition">call 423-946-9449</a> and describe your problem to our experts.
         </p>
       </div>
       

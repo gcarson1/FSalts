@@ -183,7 +183,7 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-white mb-4">24/7 Support</h3>
               <p className="text-sm text-slate-400 mb-1">
-                <a href="tel:+15551234567" className="hover:text-blue-400 transition font-semibold">555-123-4567</a>
+                <a href="tel:+15551234567" className="hover:text-blue-400 transition font-semibold">423-946-9449</a>
               </p>
               <p className="text-xs text-slate-500 mb-2">Serving Johnson City, Kingsport, Bristol</p>
               <p className="text-xs text-slate-500">Licensed • Insured • Bonded</p>
