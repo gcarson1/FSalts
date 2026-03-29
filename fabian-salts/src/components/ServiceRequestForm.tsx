@@ -8,29 +8,69 @@ export default function ServiceRequestForm() {
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [feedback, setFeedback] = useState<{ success: boolean; message: string } | null>(null)
+  
+  // THE FIX: One master state object to rule them all. 
+  // React will remember this regardless of what Framer Motion is animating.
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    serviceType: "leak", // default select value
+    urgency: "emergency", // default select value
+    preferredDate: ""
+  })
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.preventDefault()
+  // Universal handler for all inputs
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault() // Stop the form from submitting early
+    
+    // Check our state directly instead of the DOM
+    if (!formData.name || !formData.phone || !formData.address) {
+      setFeedback({ success: false, message: "Please fill out all contact fields before continuing." })
+      return
+    }
+    
+    setFeedback(null)
     setStep(2)
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    // Validate ALL required fields before submission
+    if (!formData.name || !formData.phone || !formData.address || !formData.serviceType || !formData.urgency) {
+      setFeedback({ success: false, message: "Please fill out all required fields." })
+      return
+    }
+    
     setIsSubmitting(true)
     setFeedback(null)
 
-    const formData = new FormData(e.currentTarget)
-    const result = await submitServiceRequest(formData)
+    // Build a fresh FormData object directly from our bulletproof React state
+    const payload = new FormData()
+    Object.entries(formData).forEach(([key, value]) => {
+      payload.append(key, value)
+    })
+
+    const result = await submitServiceRequest(payload)
     
     setFeedback(result)
     setIsSubmitting(false)
-    if (result.success) setStep(3) // Success screen
+    if (result.success) setStep(3)
   }
 
   return (
     <div className="mx-auto w-full max-w-xl rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-xl" id="booking-form">
       <h2 className="mb-6 text-2xl font-bold text-slate-100">Request Service</h2>
       
+      {step === 1 && feedback && !feedback.success && (
+        <div className="mb-4 text-sm font-medium text-red-500">{feedback.message}</div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <AnimatePresence mode="wait">
           {/* STEP 1: Contact Info */}
@@ -39,17 +79,38 @@ export default function ServiceRequestForm() {
               <div className="space-y-4">
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">Full Name</label>
-                  <input required name="name" type="text" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                  <input 
+                    required 
+                    name="name" 
+                    type="text" 
+                    value={formData.name} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" 
+                  />
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">Phone Number</label>
-                  <input required name="phone" type="tel" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                  <input 
+                    required 
+                    name="phone" 
+                    type="tel" 
+                    value={formData.phone} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" 
+                  />
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">Service Address</label>
-                  <input required name="address" type="text" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                  <input 
+                    required 
+                    name="address" 
+                    type="text" 
+                    value={formData.address} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" 
+                  />
                 </div>
-                <button onClick={handleNext} className="mt-4 w-full rounded-md bg-blue-600 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700">Next Step →</button>
+                <button type="button" onClick={handleNext} className="mt-4 w-full rounded-md bg-blue-600 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-700">Next Step →</button>
               </div>
             </motion.div>
           )}
@@ -60,7 +121,12 @@ export default function ServiceRequestForm() {
               <div className="space-y-4">
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">What needs fixing?</label>
-                  <select name="serviceType" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none">
+                  <select 
+                    name="serviceType" 
+                    value={formData.serviceType} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none"
+                  >
                     <option value="leak">Leak Repair</option>
                     <option value="clog">Drain Cleaning</option>
                     <option value="water-heater">Water Heater</option>
@@ -70,7 +136,12 @@ export default function ServiceRequestForm() {
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">Urgency Level</label>
-                  <select name="urgency" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none">
+                  <select 
+                    name="urgency" 
+                    value={formData.urgency} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none"
+                  >
                     <option value="emergency">🚨 Emergency (Need someone now)</option>
                     <option value="soon">High (Next 24 hours)</option>
                     <option value="routine">Routine (Whenever available)</option>
@@ -78,7 +149,13 @@ export default function ServiceRequestForm() {
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">Preferred Date/Time</label>
-                  <input name="preferredDate" type="datetime-local" className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none" />
+                  <input 
+                    name="preferredDate" 
+                    type="datetime-local" 
+                    value={formData.preferredDate} 
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-slate-600 bg-slate-900 px-4 py-2 text-slate-100 focus:border-blue-500 focus:outline-none" 
+                  />
                 </div>
                 
                 {feedback && !feedback.success && (
