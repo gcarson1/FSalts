@@ -214,43 +214,43 @@ export default function Troubleshooter() {
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm shadow-2xl">
       {/* Premium Header */}
-      <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-6 border-b border-slate-700/50">
-        <h3 className="text-2xl font-bold text-white flex items-center justify-center gap-3 mb-2">
+      <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-4 sm:p-6 border-b border-slate-700/50">
+        <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center justify-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/30">
-            <Wrench className="h-6 w-6 text-blue-400" />
+            <Wrench className="h-5 sm:h-6 w-5 sm:w-6 text-blue-400" />
           </div>
           Smart Diagnostic Assistant
         </h3>
-        <p className="text-center text-sm text-slate-400">Get instant guidance for your plumbing issues</p>
+        <p className="text-center text-xs sm:text-sm text-slate-400">Get instant guidance for your plumbing issues</p>
       </div>
 
       {/* Disclaimer */}
-      <div className="px-8 pt-6 pb-4">
-        <p className="text-xs text-slate-400 text-center">
+      <div className="px-4 sm:px-8 pt-4 sm:pt-6 pb-2 sm:pb-4">
+        <p className="text-xs sm:text-sm text-slate-400 text-center">
           💡 <strong>Don't see your issue?</strong> {" "}
           <a href="#booking-form" className="text-blue-400 hover:text-blue-300 transition">Schedule a service call</a> or {" "}
           <a href="tel:+15551234567" className="text-blue-400 hover:text-blue-300 transition">call 555-123-4567</a> and describe your problem to our experts.
         </p>
       </div>
       
-      <div className="px-8 pb-8">
+      <div className="px-4 sm:px-8 pb-6 sm:pb-8">
         <AnimatePresence mode="wait">
           {/* STEP 1: Location Selection */}
           {step === 1 && (
             <motion.div key="step1" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <p className="mb-6 text-center text-lg font-semibold text-slate-200">Where's the problem?</p>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <p className="mb-4 sm:mb-6 text-center text-base sm:text-lg font-semibold text-slate-200">Where's the problem?</p>
+              <div className="grid gap-2 sm:gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                 {LOCATIONS.map((loc) => (
                   <button 
                     key={loc.id} 
                     onClick={() => handleLocation(loc.id)} 
-                    className="group relative p-4 rounded-xl border border-slate-600 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300 text-left overflow-hidden"
+                    className="group relative p-3 sm:p-4 rounded-lg sm:rounded-xl border border-slate-600 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300 text-left overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative">
-                      <div className="text-2xl mb-2">{loc.label.split(" ")[0]}</div>
-                      <div className="font-semibold text-white">{loc.label.split(" ").slice(1).join(" ")}</div>
-                      <div className="text-xs text-slate-400 mt-1">{loc.desc}</div>
+                      <div className="text-lg sm:text-2xl mb-1 sm:mb-2">{loc.label.split(" ")[0]}</div>
+                      <div className="font-semibold text-white text-xs sm:text-sm">{loc.label.split(" ").slice(1).join(" ")}</div>
+                      <div className="text-xs text-slate-400 mt-0.5 sm:mt-1">{loc.desc}</div>
                     </div>
                   </button>
                 ))}
@@ -261,8 +261,8 @@ export default function Troubleshooter() {
           {/* STEP 2: Issue Selection */}
           {step === 2 && (
             <motion.div key="step2" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <p className="mb-6 text-center text-lg font-semibold text-slate-200">What seems to be the problem?</p>
-              <div className="grid gap-3 mb-6">
+              <p className="mb-4 sm:mb-6 text-center text-base sm:text-lg font-semibold text-slate-200">What seems to be the problem?</p>
+              <div className="grid gap-2 sm:gap-3 mb-4 sm:mb-6">
                 {ISSUES[location].map((issue) => {
                   const badge = getSeverityBadge(issue.severity)
                   const BadgeIcon = badge.icon
@@ -270,14 +270,14 @@ export default function Troubleshooter() {
                     <button 
                       key={issue.id} 
                       onClick={() => handleIssue(issue)} 
-                      className="group relative p-4 rounded-xl border border-slate-600 hover:border-blue-500/50 hover:bg-slate-800/50 transition-all duration-300 text-left overflow-hidden"
+                      className="group relative p-3 sm:p-4 rounded-lg sm:rounded-xl border border-slate-600 hover:border-blue-500/50 hover:bg-slate-800/50 transition-all duration-300 text-left overflow-hidden"
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-white mb-1">{issue.label}</div>
-                          <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full border text-xs font-semibold ${badge.color}`}>
+                          <div className="font-semibold text-white text-sm mb-1">{issue.label}</div>
+                          <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-semibold ${badge.color}`}>
                             <BadgeIcon className="h-3 w-3" />
-                            {badge.text}
+                            <span className="hidden sm:inline">{badge.text}</span>
                           </div>
                         </div>
                         <ArrowRight className="h-5 w-5 text-blue-400 flex-shrink-0" />
@@ -286,7 +286,7 @@ export default function Troubleshooter() {
                   )
                 })}
               </div>
-              <button onClick={() => setStep(1)} className="text-sm text-slate-400 hover:text-slate-200 transition">← Back</button>
+              <button onClick={() => setStep(1)} className="text-xs sm:text-sm text-slate-400 hover:text-slate-200 transition">← Back</button>
             </motion.div>
           )}
 
@@ -294,8 +294,8 @@ export default function Troubleshooter() {
           {step === 3 && selectedIssue && (
             <motion.div key="step3" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
               {/* Severity Banner */}
-              <div className={`mb-6 p-4 rounded-xl border bg-gradient-to-r ${getSeverityColor(selectedIssue.severity)} border-opacity-50 bg-opacity-20`}>
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold ${getSeverityBadge(selectedIssue.severity).color}`}>
+              <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg sm:rounded-xl border bg-gradient-to-r ${getSeverityColor(selectedIssue.severity)} border-opacity-50 bg-opacity-20">
+                <div className={`inline-flex items-center gap-2 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold ${getSeverityBadge(selectedIssue.severity).color}`}>
                   {(() => {
                     const Icon = getSeverityBadge(selectedIssue.severity).icon
                     return <><Icon className="h-4 w-4" /> {getSeverityBadge(selectedIssue.severity).text}</>
@@ -304,43 +304,43 @@ export default function Troubleshooter() {
               </div>
 
               {/* Problem Summary */}
-              <div className="mb-6 p-4 rounded-lg bg-slate-900/50 border border-slate-700/50">
-                <p className="text-slate-300"><strong>What's happening:</strong> {selectedIssue.tip}</p>
+              <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg sm:rounded-lg bg-slate-900/50 border border-slate-700/50">
+                <p className="text-slate-300 text-sm"><strong>What's happening:</strong> {selectedIssue.tip}</p>
               </div>
 
               {/* Step-by-step guide */}
-              <div className="mb-6">
-                <h4 className="font-bold text-white mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-blue-400" />
+              <div className="mb-4 sm:mb-6">
+                <h4 className="font-bold text-white text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
+                  <CheckCircle2 className="h-4 sm:h-5 w-4 sm:w-5 text-blue-400" />
                   What You Can Do Right Now:
                 </h4>
-                <ol className="space-y-3">
+                <ol className="space-y-2 sm:space-y-3">
                   {selectedIssue.steps.map((step: string, idx: number) => (
-                    <li key={idx} className="flex gap-3">
-                      <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                    <li key={idx} className="flex gap-2 sm:gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
                         <span className="text-xs font-bold text-blue-400">{idx + 1}</span>
                       </div>
-                      <p className="text-slate-300 pt-1">{step}</p>
+                      <p className="text-slate-300 text-sm pt-0.5">{step}</p>
                     </li>
                   ))}
                 </ol>
               </div>
 
               {/* When to call */}
-              <div className="mb-6 p-4 rounded-lg bg-blue-500/10 border border-blue-500/30">
-                <p className="text-blue-300 text-sm"><strong>Next step:</strong> {selectedIssue.shouldCall}</p>
+              <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg bg-blue-500/10 border border-blue-500/30">
+                <p className="text-blue-300 text-xs sm:text-sm"><strong>Next step:</strong> {selectedIssue.shouldCall}</p>
               </div>
 
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href="#booking-form" className="flex-1 group relative px-6 py-4 font-bold text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-red-600/50">
+              <div className="flex flex-col gap-2 sm:gap-3">
+                <a href="#booking-form" className="w-full group relative px-4 sm:px-6 py-3 sm:py-4 font-bold text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-red-600/50">
                   <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 group-hover:from-red-500 group-hover:to-red-600 transition-all duration-300"></div>
-                  <span className="relative flex items-center justify-center gap-2">
-                    <Wrench className="h-5 w-5" />
+                  <span className="relative flex items-center justify-center gap-2 text-sm sm:text-base">
+                    <Wrench className="h-4 sm:h-5 w-4 sm:w-5" />
                     Schedule Expert Service
                   </span>
                 </a>
-                <button onClick={() => setStep(1)} className="px-6 py-4 font-bold text-slate-300 rounded-lg border-2 border-slate-600 hover:border-slate-500 hover:bg-slate-800/50 transition-all">
+                <button onClick={() => setStep(1)} className="w-full px-4 sm:px-6 py-3 sm:py-4 font-bold text-slate-300 rounded-lg border-2 border-slate-600 hover:border-slate-500 hover:bg-slate-800/50 transition-all text-sm sm:text-base">
                   ← Diagnose Another Issue
                 </button>
               </div>

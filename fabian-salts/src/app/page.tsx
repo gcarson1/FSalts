@@ -1,29 +1,10 @@
 import Header from "@/components/Header"
 import Troubleshooter from "@/components/Troubleshooter"
 import ServiceRequestForm from "@/components/ServiceRequestForm"
+import TestimonialsSection from "@/components/TestimonialsSection"
 import { Shield, Clock, Wrench, Zap, CheckCircle2, Star, TrendingUp, Award, Users } from "lucide-react"
 
 export default function Home() {
-  const testimonials = [
-    {
-      text: "The team arrived within 45 minutes and had us back to normal within the hour. Professional, courteous, and transparent pricing.",
-      author: "Sarah Mitchell",
-      role: "Homeowner, Downtown",
-      rating: 5
-    },
-    {
-      text: "We've contracted Salts Brothers for our entire commercial property portfolio. Zero downtime, premium service quality.",
-      author: "James Richardson",
-      role: "Property Manager",
-      rating: 5
-    },
-    {
-      text: "The diagnostic tool alone saved us $800 by catching the issue early. Their expertise is unmatched.",
-      author: "Michael Chen",
-      role: "Business Owner",
-      rating: 5
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-200">
@@ -43,7 +24,7 @@ export default function Home() {
             <div className="text-center">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500/20 to-blue-600/20 px-4 py-2 border border-blue-500/50 backdrop-blur-sm">
                 <Zap className="h-4 w-4 text-blue-300" />
-                <span className="text-sm font-semibold text-blue-200">Industry-Leading Service Excellence</span>
+                <span className="text-sm font-semibold text-blue-200">Johnson City • Kingsport • Bristol • Regional Excellence</span>
               </div>
               
               <h1 className="mb-6 text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1]">
@@ -52,7 +33,7 @@ export default function Home() {
               </h1>
               
               <p className="mb-12 text-xl sm:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
-                Engineered excellence meets proven reliability. Experience the difference when expertise, integrity, and innovation converge.
+                The Tri-Cities' distributed plumbing authority. Engineered excellence across Johnson City, Kingsport, and Bristol—local expertise, premium results.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -96,13 +77,13 @@ export default function Home() {
               <p className="text-slate-400">Why industry leaders choose Salts Brothers</p>
             </div>
             
-            <div className="grid gap-8 sm:grid-cols-5">
+            <div className="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {[
-                { icon: Clock, title: "15-Min Response", desc: "Fastest in-market dispatch" },
-                { icon: Shield, title: "100% Coverage", desc: "Full liability insurance" },
-                { icon: Wrench, title: "Expert Techs", desc: "Average 12+ years experience" },
-                { icon: TrendingUp, title: "Transparent Pricing", desc: "Zero hidden fees guarantee" },
-                { icon: Award, title: "Warranty Promise", desc: "5-year service guarantee" }
+                { icon: Clock, title: "15-Min Response", desc: "Distributed dispatch network" },
+                { icon: Shield, title: "Regional Authority", desc: "Deep local infrastructure knowledge" },
+                { icon: Wrench, title: "Expert Technicians", desc: "Average 12+ years experience" },
+                { icon: TrendingUp, title: "Transparent Pricing", desc: "Zero hidden fees, guaranteed" },
+                { icon: Award, title: "5-Year Warranty", desc: "All service backed" }
               ].map((item, i) => (
                 <div key={i} className="group relative p-6 rounded-xl border border-slate-800 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -139,32 +120,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TESTIMONIALS SECTION - Fortune 500 level */}
-        <section className="px-4 py-24">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-white mb-3">Trusted by Industry Leaders</h2>
-              <p className="text-slate-400 text-lg">See why our clients choose Salts Brothers Plumbing for mission-critical installations</p>
-            </div>
-            
-            <div className="grid gap-8 sm:grid-cols-3">
-              {testimonials.map((testimonial, i) => (
-                <div key={i} className="group relative p-8 rounded-xl border border-slate-800 hover:border-blue-500/50 bg-slate-900/50 hover:bg-slate-900/80 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
-                  <div className="mb-4 flex gap-1">
-                    {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-slate-200 mb-6 text-lg leading-relaxed italic">"{testimonial.text}"</p>
-                  <div>
-                    <p className="font-bold text-white">{testimonial.author}</p>
-                    <p className="text-sm text-slate-400">{testimonial.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* TESTIMONIALS SECTION */}
+        <TestimonialsSection />
 
         {/* TROUBLESHOOTER SECTION */}
         <section id="troubleshoot" className="px-4 py-24 border-y border-slate-800/50">
@@ -205,7 +162,7 @@ export default function Home() {
                 <Wrench className="h-6 w-6 text-blue-400" />
                 <h3 className="font-bold text-white text-lg">Salts Brothers</h3>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed">Engineered excellence in plumbing since 2015. Setting the industry standard for quality and service.</p>
+              <p className="text-sm text-slate-400 leading-relaxed">Serving Johnson City, Kingsport, and Bristol since 2015. Regional infrastructure expertise meets premium service excellence and transparent operations.</p>
             </div>
             <div>
               <h3 className="font-bold text-white mb-4">Quick Access</h3>
@@ -225,9 +182,10 @@ export default function Home() {
             </div>
             <div>
               <h3 className="font-bold text-white mb-4">24/7 Support</h3>
-              <p className="text-sm text-slate-400 mb-3">
+              <p className="text-sm text-slate-400 mb-1">
                 <a href="tel:+15551234567" className="hover:text-blue-400 transition font-semibold">555-123-4567</a>
               </p>
+              <p className="text-xs text-slate-500 mb-2">Serving Johnson City, Kingsport, Bristol</p>
               <p className="text-xs text-slate-500">Licensed • Insured • Bonded</p>
             </div>
           </div>
