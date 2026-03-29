@@ -1,26 +1,43 @@
 "use client"
 
-import { Phone, Wrench } from "lucide-react"
+import { Phone, Wrench, Award } from "lucide-react"
 import Link from "next/link"
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-slate-900/80">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 text-slate-100">
-          <Wrench className="h-6 w-6 text-blue-400" />
-          <span className="text-xl font-bold tracking-tight">Fabian Salts <span className="text-blue-400">Plumbing</span></span>
-        </Link>
-        
-        {/* Mobile-dominating CTA */}
-        <a 
-          href="tel:+15551234567" 
-          className="flex items-center gap-2 rounded-md bg-red-600 px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-slate-900"
-        >
-          <Phone className="h-4 w-4 animate-pulse" />
-          <span className="hidden sm:inline">Emergency Service: </span>
-          555-123-4567
-        </a>
+    <header className="sticky top-0 z-50 w-full border-b border-slate-800/50 bg-gradient-to-r from-slate-950/95 via-slate-900/95 to-slate-950/95 backdrop-blur-lg supports-[backdrop-filter]:bg-slate-900/80">
+      <div className="container mx-auto px-4">
+        {/* Top bar with certifications */}
+        <div className="py-2 px-4 -mx-4 border-b border-slate-800/30 bg-gradient-to-r from-blue-600/5 to-transparent">
+          <p className="text-xs text-slate-400 flex items-center gap-2">
+            <Award className="h-3 w-3 text-blue-400" />
+            Certified Professional • Licensed • Bonded • Insured
+          </p>
+        </div>
+
+        {/* Main header */}
+        <div className="flex h-20 items-center justify-between">
+<Link href="/" className="flex items-center gap-2 text-slate-100 hover:text-white transition-colors group">
+          <div>
+            <div className="text-2xl font-black tracking-tight leading-none">
+                SALTS BROTHERS
+              </div>
+              <div className="text-xs tracking-widest text-blue-400 font-black">PLUMBING EXCELLENCE</div>
+            </div>
+          </Link>
+          
+          {/* Premium CTA */}
+          <a 
+            href="tel:+15551234567" 
+            className="flex items-center gap-3 px-6 py-3 rounded-lg font-bold text-white transition-all duration-300 hover:shadow-2xl hover:shadow-red-600/50 group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 group-hover:from-red-500 group-hover:to-red-600 transition-all duration-300"></div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-red-400 to-red-600 blur-lg transition-all duration-300"></div>
+            <Phone className="h-5 w-5 relative animate-pulse" />
+            <span className="hidden sm:inline relative">Emergency: 555-123-4567</span>
+            <span className="sm:hidden relative">Call Now</span>
+          </a>
+        </div>
       </div>
     </header>
   )

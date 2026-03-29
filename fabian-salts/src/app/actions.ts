@@ -129,7 +129,7 @@ export async function submitServiceRequest(formData: FormData) {
             </div>
 
             <div class="footer">
-              <p>This request was submitted through the Fabian Salts service portal.</p>
+              <p>This request was submitted through the Salts Brothers service portal.</p>
             </div>
           </div>
         </body>
