@@ -11,7 +11,7 @@ const LOCATIONS = [
   { id: "general", label: "🔧 General / Whole House", desc: "Main line, pressure, or other" },
 ]
 
-const ISSUES: Record<string, { id: string; label: string; severity: "critical" | "high" | "medium"; tip: string; steps: string[]; shouldCall: string }[]> = {
+const ISSUES: Record<string, { id: string; label: string; severity: "critical" | "high" | "medium" | "low"; tip: string; steps: string[]; shouldCall: string }[]> = {
   kitchen: [
     { 
       id: "sink-leak", 
