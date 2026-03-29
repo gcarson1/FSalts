@@ -129,7 +129,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Intelligent Diagnostics</h2>
               <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                Our proprietary AI system identifies plumbing issues with surgical precision. Save time, money, and prevent emergency damage.
+                Our proprietary system identifies plumbing issues with surgical precision. Save time, money, and prevent emergency damage.
               </p>
             </div>
             <Troubleshooter />
