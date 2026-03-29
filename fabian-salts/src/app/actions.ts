@@ -40,6 +40,9 @@ export async function submitServiceRequest(formData: FormData) {
     }
     const urgencyDisplay = urgencyLabels[data.urgency as string] || data.urgency;
 
+    // Simple urgency prefix for email subject
+    const urgencyPrefix = data.urgency === 'emergency' ? '[🚨 URGENT]' : data.urgency === 'soon' ? '[⚡ HIGH]' : '[📋 ROUTINE]';
+
     // Format preferred date
     const preferredDateDisplay = data.preferredDate 
       ? new Date(data.preferredDate as string).toLocaleString('en-US', { 
@@ -136,7 +139,7 @@ export async function submitServiceRequest(formData: FormData) {
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'gcarson1@vols.utk.edu',
-      subject: `${urgencyDisplay.split(' ')[0]} Plumbing Request: ${data.name} - ${serviceName}`,
+      subject: `${urgencyPrefix} ${data.name} - ${serviceName}`,
       html: emailHtml,
     });
 
