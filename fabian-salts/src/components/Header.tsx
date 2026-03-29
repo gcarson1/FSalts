@@ -34,7 +34,7 @@ export default function Header() {
             <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 group-hover:from-red-500 group-hover:to-red-600 transition-all duration-300"></div>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-red-400 to-red-600 blur-lg transition-all duration-300"></div>
             <Phone className="h-5 w-5 relative animate-pulse" />
-            <span className="hidden sm:inline relative">Emergency: 555-123-4567</span>
+            <span className="hidden sm:inline relative">Emergency: 423-946-9449</span>
             <span className="sm:hidden relative">Call Now</span>
           </a>
         </div>
